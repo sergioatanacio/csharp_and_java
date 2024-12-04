@@ -4,8 +4,7 @@
  */
 package CapaPresentacion;
 
-import Paneles.IngresarProducto;
-import Paneles.CategoriaProducto;
+
 import CapaEntidad.EntidadUsuario;
 import Paneles.FrmCategoriaProducto;
 import java.awt.BorderLayout;
@@ -41,10 +40,10 @@ public class Inicio extends javax.swing.JFrame {
         } else {
             // Si el usuario no es null, realizar las acciones correspondientes
             initComponents();
-            CategoriaProducto p1 = new CategoriaProducto();
-            p1.setSize(401, 500);
-            p1.setLocation(0, 0);
-            setLocationRelativeTo(null);
+//            CategoriaProducto p1 = new CategoriaProducto();
+//            p1.setSize(401, 500);
+//            p1.setLocation(0, 0);
+//            setLocationRelativeTo(null);
             // Aquí puedes procesar el usuario (realizar las acciones necesarias)
             // procesarUsuario(usuario);
         }
