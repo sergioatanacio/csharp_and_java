@@ -1,0 +1,405 @@
+# Este archivo .gitignore está configurado para un repositorio que contiene múltiples soluciones,
+# incluyendo proyectos de C# (Visual Studio) y proyectos de Java (NetBeans, Maven, etc.),
+# almacenados en varias subcarpetas y sub-subcarpetas.
+
+## Ignorar archivos temporales, resultados de compilación y
+## archivos generados por complementos populares de Visual Studio.
+
+# Archivos específicos del usuario
+*.rsuser          # Preferencias de usuario de Visual Studio
+*.suo             # Opciones de usuario de la solución
+*.user            # Configuraciones específicas del usuario
+*.userosscache    # Caché de usuario OSS
+*.sln.docstates   # Estado de los documentos en la solución
+
+# Archivos específicos de MonoDevelop/Xamarin Studio
+*.userprefs       # Preferencias de usuario
+
+# Archivos generados automáticamente por Mono
+mono_crash.*      # Informes de fallos de Mono
+
+# Resultados de compilación
+[Dd]ebug/         # Directorio de compilación de depuración
+[Dd]ebugPublic/   # Directorio de depuración pública
+[Rr]elease/       # Directorio de compilación de lanzamiento
+[Rr]eleases/      # Directorios de lanzamientos
+x64/              # Archivos compilados para arquitectura x64
+x86/              # Archivos compilados para arquitectura x86
+[Ww][Ii][Nn]32/   # Archivos compilados para Win32
+[Aa][Rr][Mm]/     # Archivos compilados para ARM
+[Aa][Rr][Mm]64/   # Archivos compilados para ARM64
+bld/              # Directorio de compilación
+[Bb]in/           # Archivos binarios compilados
+[Oo]bj/           # Archivos de objetos compilados
+[Oo]ut/           # Directorio de salida
+[Ll]og/           # Archivos de registro
+[Ll]ogs/          # Directorio de registros
+
+# Directorio de caché/opciones de Visual Studio
+.vs/              # Configuraciones y caché de Visual Studio
+
+# Archivos generados automáticamente por Visual Studio 2017
+Generated\ Files/ # Archivos generados durante la compilación
+
+# Resultados de pruebas MSTest
+[Tt]est[Rr]esult*/ # Resultados de pruebas
+[Bb]uild[Ll]og.*   # Archivos de registro de compilación
+
+# NUnit
+*.VisualState.xml  # Estado visual de las pruebas
+TestResult.xml     # Resultados de pruebas
+nunit-*.xml        # Resultados de NUnit
+
+# Resultados de compilación de un proyecto ATL
+[Dd]ebugPS/        # Directorio de depuración de ATL
+[Rr]eleasePS/      # Directorio de lanzamiento de ATL
+dlldata.c          # Archivo generado por MIDL
+
+# Resultados de Benchmark
+BenchmarkDotNet.Artifacts/ # Artefactos generados por BenchmarkDotNet
+
+# .NET Core
+project.lock.json          # Archivo de bloqueo de dependencias
+project.fragment.lock.json # Archivo de fragmento de bloqueo
+artifacts/                 # Directorio de artefactos de compilación
+
+# Scaffold de ASP.NET
+ScaffoldingReadMe.txt      # Archivo de lectura generado por scaffold
+
+# StyleCop
+StyleCopReport.xml         # Informe generado por StyleCop
+
+# Archivos generados por Visual Studio
+*_i.c            # Archivos intermedios
+*_p.c            # Archivos proxy
+*_h.h            # Archivos de cabecera
+*.ilk            # Archivos de enlace incremental
+*.meta           # Archivos de metadatos
+*.obj            # Archivos de objetos
+*.iobj           # Archivos intermedios de objetos
+*.pch            # Archivos de cabecera precompilada
+*.pdb            # Bases de datos de programas (depuración)
+*.ipdb           # Archivos intermedios de PDB
+*.pgc            # Archivos de cobertura de perfiles
+*.pgd            # Datos de perfiles
+*.rsp            # Archivos de respuesta del compilador
+*.sbr            # Archivos de navegador de símbolos
+*.tlb            # Librerías de tipos
+*.tli            # Implementaciones en línea de tipos
+*.tlh            # Archivos de cabecera generados a partir de tipos
+*.tmp            # Archivos temporales
+*.tmp_proj       # Archivos de proyecto temporales
+*_wpftmp.csproj  # Archivos de proyecto temporales de WPF
+*.log            # Archivos de registro
+*.vspscc         # Archivos de control de código fuente
+*.vssscc         # Archivos de control de código fuente
+.builds          # Archivos de configuración de compilación
+*.pidb           # Bases de datos de índices
+*.svclog         # Archivos de registro de servicios
+*.scc            # Archivos de control de código fuente
+
+# Archivos de prueba de Chutzpah
+_Chutzpah*       # Archivos temporales de Chutzpah
+
+# Archivos de caché de Visual C++
+ipch/            # Caché de cabeceras precompiladas
+*.aps            # Archivos de recursos
+*.ncb            # Bases de datos de clases
+*.opendb         # Bases de datos abiertas
+*.opensdf        # Archivos de base de datos SQL abiertos
+*.sdf            # Bases de datos de solución
+*.cachefile      # Archivos de caché
+*.VC.db          # Bases de datos de VC
+*.VC.VC.opendb   # Bases de datos abiertas de VC
+
+# Perfilador de Visual Studio
+*.psess          # Sesiones de rendimiento
+*.vsp            # Archivos de perfiles
+*.vspx           # Archivos de perfiles comprimidos
+*.sap            # Archivos de análisis
+
+# Archivos de trazas de Visual Studio
+*.e2e            # Archivos de trazas de extremo a extremo
+
+# Espacio de trabajo local de TFS 2012
+$tf/             # Directorio de control de versiones de TFS
+
+# Kit de Automatización de Guías
+*.gpState        # Estado de proyectos de automatización
+
+# ReSharper (complemento de codificación para .NET)
+_ReSharper*/     # Directorios de ReSharper
+*.[Rr]e[Ss]harper # Archivos de configuración
+*.DotSettings.user # Configuraciones de usuario
+
+# TeamCity (complemento de compilación)
+_TeamCity*       # Directorios de TeamCity
+
+# DotCover (herramienta de cobertura de código)
+*.dotCover       # Archivos de cobertura
+
+# AxoCover (herramienta de cobertura de código)
+.axoCover/*      # Directorio de AxoCover
+!.axoCover/settings.json # Excluir archivo de configuración
+
+# Coverlet (herramienta de cobertura de código multiplataforma)
+coverage*.json   # Informes de cobertura en JSON
+coverage*.xml    # Informes de cobertura en XML
+coverage*.info   # Informes de cobertura en formato info
+
+# Resultados de cobertura de código de Visual Studio
+*.coverage       # Archivos binarios de cobertura
+*.coveragexml    # Archivos XML de cobertura
+
+# NCrunch (herramienta de pruebas)
+_NCrunch_*       # Directorios de NCrunch
+.*crunch*.local.xml # Configuraciones locales
+nCrunchTemp_*    # Archivos temporales
+
+# MightyMoose (herramienta de pruebas)
+*.mm.*           # Archivos de MightyMoose
+AutoTest.Net/    # Directorio de AutoTest.Net
+
+# Caché de Web Workbench (Sass)
+.sass-cache/     # Caché de archivos Sass
+
+# Directorio de salida de InstallShield
+[Ee]xpress/      # Archivos de InstallShield Express
+
+# DocProject (generador de documentación)
+DocProject/buildhelp/     # Ayuda generada
+DocProject/Help/*.HxT     # Tabla de contenido
+DocProject/Help/*.HxC     # Colecciones de ayuda
+DocProject/Help/*.hhc     # Archivos de contenido HTML Help
+DocProject/Help/*.hhk     # Índices HTML Help
+DocProject/Help/*.hhp     # Proyectos HTML Help
+DocProject/Help/Html2     # Archivos intermedios HTML
+DocProject/Help/html      # Archivos HTML generados
+
+# Directorio de ClickOnce
+publish/         # Archivos de publicación
+
+# Salida de publicación web
+*.[Pp]ublish.xml # Configuraciones de publicación
+*.azurePubxml    # Configuraciones de publicación de Azure
+*.pubxml         # Archivos de publicación (pueden contener información sensible)
+*.publishproj    # Proyectos de publicación
+
+# Scripts de publicación de Microsoft Azure Web App
+PublishScripts/  # Scripts de publicación (pueden contener información sensible)
+
+# Paquetes NuGet
+*.nupkg          # Paquetes NuGet compilados
+*.snupkg         # Paquetes de símbolos NuGet
+**/[Pp]ackages/* # Directorio de paquetes (puede ser restaurado)
+!**/[Pp]ackages/build/ # No ignorar la carpeta de compilación
+*.nuget.props    # Propiedades de NuGet
+*.nuget.targets  # Targets de NuGet
+
+# Salida de compilación de Microsoft Azure
+csx/             # Archivos de scripts C#
+*.build.csdef    # Definiciones de compilación
+
+# Emulador de Microsoft Azure
+ecf/             # Archivos de configuración de emulador
+rcf/             # Archivos de configuración de emulador
+
+# Directorios y archivos de paquetes de aplicaciones de Windows Store
+AppPackages/            # Paquetes de aplicaciones
+BundleArtifacts/        # Artefactos de paquetes
+Package.StoreAssociation.xml # Asociación con la tienda
+_pkginfo.txt            # Información del paquete
+*.appx                  # Paquetes de aplicaciones
+*.appxbundle            # Paquetes de aplicaciones
+*.appxupload            # Paquetes para subir a la tienda
+
+# Archivos de caché de Visual Studio
+*.[Cc]ache          # Archivos de caché
+!?*.[Cc]ache/       # No ignorar directorios que terminen con .cache
+
+# Otros
+ClientBin/         # Archivos binarios del cliente
+~$*                # Archivos temporales
+*~                 # Archivos de respaldo
+*.dbmdl            # Archivos de modelo de base de datos
+*.dbproj.schemaview # Vistas de esquema de proyectos de base de datos
+*.jfm              # Archivos de configuración de JFormDesigner
+*.pfx              # Archivos de certificados
+*.publishsettings  # Configuraciones de publicación
+orleans.codegen.cs # Código generado por Orleans
+
+# Incluir archivos de clave fuerte puede presentar un riesgo de seguridad
+# *.snk            # Archivos de clave fuerte
+
+# Descomentar la siguiente línea para ignorar bower_components si es necesario
+# bower_components/
+
+# Proyectos RIA/Silverlight
+Generated_Code/    # Código generado
+
+# Archivos de respaldo y reportes de conversión de proyectos antiguos
+_UpgradeReport_Files/  # Informes de actualización
+Backup*/               # Carpetas de respaldo
+UpgradeLog*.XML        # Registros de actualización
+UpgradeLog*.htm        # Registros de actualización en HTML
+ServiceFabricBackup/   # Respaldo de Service Fabric
+*.rptproj.bak          # Respaldo de proyectos de informes
+
+# Archivos de SQL Server
+*.mdf              # Archivos de base de datos principal
+*.ldf              # Archivos de registro
+*.ndf              # Archivos de base de datos secundarios
+
+# Proyectos de Inteligencia de Negocios
+*.rdl.data         # Datos de informes
+*.bim.layout       # Diseños de modelos
+*.bim_*.settings   # Configuraciones de modelos
+*.rptproj.rsuser   # Configuraciones de usuario
+*- [Bb]ackup.rdl   # Respaldo de informes
+*- [Bb]ackup ([0-9]).rdl
+*- [Bb]ackup ([0-9][0-9]).rdl
+
+# Microsoft Fakes
+FakesAssemblies/   # Ensamblados de fakes
+
+# Archivo de configuración de GhostDoc
+*.GhostDoc.xml     # Configuraciones de GhostDoc
+
+# Herramientas Node.js para Visual Studio
+.ntvs_analysis.dat # Datos de análisis de Node.js
+node_modules/      # Directorio de módulos de Node.js
+
+# Registro de compilación de Visual Studio 6
+*.plg              # Archivos de registro
+
+# Archivo de opciones de espacio de trabajo de Visual Studio 6
+*.opt              # Opciones de espacio de trabajo
+
+# Archivo de espacio de trabajo generado automáticamente por Visual Studio 6
+*.vbw              # Archivos de espacio de trabajo de Visual Basic
+
+# Salida de compilación de Visual Studio LightSwitch
+**/*.HTMLClient/GeneratedArtifacts # Artefactos generados para HTMLClient
+**/*.DesktopClient/GeneratedArtifacts # Artefactos generados para DesktopClient
+**/*.DesktopClient/ModelManifest.xml  # Manifiestos de modelo
+**/*.Server/GeneratedArtifacts         # Artefactos generados para el servidor
+**/*.Server/ModelManifest.xml          # Manifiestos de modelo
+_Pvt_Extensions    # Extensiones privadas
+
+# Administrador de dependencias Paket
+.paket/paket.exe   # Ejecutable de Paket
+paket-files/       # Archivos de Paket
+
+# FAKE - F# Make
+.fake/             # Directorio de FAKE
+
+# Configuraciones personales de CodeRush
+.cr/personal       # Configuraciones de usuario de CodeRush
+
+# Herramientas Python para Visual Studio (PTVS)
+__pycache__/       # Caché de Python
+*.pyc              # Archivos compilados de Python
+
+# Cake - Descomentar si lo estás utilizando
+# tools/**
+# !tools/packages.config
+
+# Tabs Studio
+*.tss              # Archivos de configuración de Tabs Studio
+
+# Archivo de configuración de JustMock de Telerik
+*.jmconfig         # Configuraciones de JustMock
+
+# Salida de compilación de BizTalk
+*.btp.cs           # Archivos de BizTalk
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+
+# Resultados de análisis de OpenCover UI
+OpenCover/         # Directorio de OpenCover
+
+# Salida de ejecución local de Azure Stream Analytics
+ASALocalRun/       # Directorio de ejecución local
+
+# Registros binarios y estructurados de MSBuild
+*.binlog           # Archivos de registro binario
+
+# Archivo de configuración del depurador de GPU de NVIDIA Nsight
+*.nvuser           # Configuraciones de Nsight
+
+# Carpeta de trabajo de MFractors (herramienta de Xamarin)
+.mfractor/         # Directorio de MFractor
+
+# Historial local para Visual Studio
+.localhistory/     # Directorio de historial local
+
+# Base de datos temporal de comprobación de estado de BeatPulse
+healthchecksdb     # Base de datos de pruebas de salud
+
+# Carpeta de respaldo para la herramienta de conversión de referencias de paquetes en VS 2017
+MigrationBackup/   # Respaldo de migración
+
+# Carpeta de trabajo de Ionide (herramientas F# para VS Code)
+.ionide/           # Directorio de Ionide
+
+# Fody - Esquema XML generado automáticamente
+FodyWeavers.xsd    # Esquema de Fody
+
+#############################################################################################
+#############################################################################################
+#############################################################################################
+
+# Archivos compilados de Java
+*.class            # Clases compiladas de Java
+
+# Archivos de registro
+*.log              # Archivos de registro de la aplicación
+
+# Archivos específicos de BlueJ
+*.ctxt             # Archivos de contexto de BlueJ
+
+# Herramientas Móviles para Java (J2ME)
+.mtj.tmp/          # Archivos temporales de Mobile Tools for Java
+
+# Archivos de paquetes
+*.jar              # Archivos de paquete Java
+*.war              # Archivos de aplicación web
+*.nar              # Archivos de aplicación nativa
+*.ear              # Archivos de aplicación empresarial
+*.zip              # Archivos comprimidos ZIP
+*.tar.gz           # Archivos comprimidos TAR.GZ
+*.rar              # Archivos comprimidos RAR
+
+# Archivos específicos de NetBeans
+nbproject/private/ # Configuraciones privadas del proyecto
+build/             # Directorio de compilación
+nbbuild/           # Directorio de compilación de NetBeans
+dist/              # Directorio de distribución
+nbdist/            # Directorio de distribución de NetBeans
+.nb-gradle/        # Configuraciones de Gradle para NetBeans
+mysql-connector-j-9.1.0/
+# Archivos específicos de Maven
+target/                   # Directorio de compilación de Maven
+pom.xml.tag               # Archivos temporales de POM
+pom.xml.releaseBackup     # Respaldo de POM en liberación
+pom.xml.versionsBackup    # Respaldo de versiones de POM
+pom.xml.next              # Próxima versión de POM
+release.properties        # Propiedades de liberación
+
+# Archivos específicos de Eclipse
+.project          # Archivo de proyecto de Eclipse
+.classpath        # Archivo de ruta de clases
+.settings/        # Configuraciones de Eclipse
+
+# Archivos específicos de IntelliJ IDEA
+.idea/            # Configuraciones de proyecto
+*.iml             # Archivos de módulo
+*.ipr             # Archivos de proyecto
+*.iws             # Archivos de espacio de trabajo
+
+# Archivos del sistema operativo
+.DS_Store         # Archivos de metadatos de macOS
+Thumbs.db         # Archivos de miniaturas de Windows
+/proyectos/java/2024-12-03--21-34/AppClientes/nbproject/private/
+/proyectos/java/2024-12-03--21-34/AppClientes/build/
