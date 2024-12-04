@@ -4,9 +4,10 @@
  */
 package CapaPresentacion;
 
-import Paneles.Segundo;
-import Paneles.Primero;
+import Paneles.IngresarProducto;
+import Paneles.CategoriaProducto;
 import CapaEntidad.EntidadUsuario;
+import Paneles.FrmCategoriaProducto;
 import java.awt.BorderLayout;
 import javax.swing.SwingUtilities;
 
@@ -40,8 +41,8 @@ public class Inicio extends javax.swing.JFrame {
         } else {
             // Si el usuario no es null, realizar las acciones correspondientes
             initComponents();
-            Primero p1 = new Primero();
-            p1.setSize(401, 251);
+            CategoriaProducto p1 = new CategoriaProducto();
+            p1.setSize(401, 500);
             p1.setLocation(0, 0);
             setLocationRelativeTo(null);
             // Aquí puedes procesar el usuario (realizar las acciones necesarias)
@@ -60,79 +61,121 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        btnsegundo = new javax.swing.JButton();
-        btnprimero = new javax.swing.JButton();
+        jMenuItem4 = new javax.swing.JMenuItem();
         content = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        m_cerrar = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        m_categoriaproducto = new javax.swing.JMenuItem();
+        m_ingresarproductos = new javax.swing.JMenuItem();
+        m_ingresarclientes = new javax.swing.JMenuItem();
+        m_ventas = new javax.swing.JMenuItem();
+        m_agendarmensajes = new javax.swing.JMenuItem();
+        m_generarcomprobante = new javax.swing.JMenuItem();
+        m_gestiondeinventario = new javax.swing.JMenuItem();
+        m_agregarusuarios = new javax.swing.JMenuItem();
+        m_verusuarios = new javax.swing.JMenuItem();
+
+        jMenuItem4.setText("jMenuItem4");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnsegundo.setText("Segundo");
-        btnsegundo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsegundoActionPerformed(evt);
-            }
-        });
-
-        btnprimero.setText("Primero");
-        btnprimero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnprimeroActionPerformed(evt);
-            }
-        });
+        content.setBackground(new java.awt.Color(255, 255, 204));
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
         content.setLayout(contentLayout);
         contentLayout.setHorizontalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 482, Short.MAX_VALUE)
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 251, Short.MAX_VALUE)
+            .addGap(0, 415, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(btnprimero)
-                .addGap(42, 42, 42)
-                .addComponent(btnsegundo)
-                .addContainerGap(179, Short.MAX_VALUE))
-            .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnprimero)
-                    .addComponent(btnsegundo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jMenu1.setText("Archivo");
+
+        m_cerrar.setText("Cerrar");
+        m_cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_cerrarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(m_cerrar);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Ventanas");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        m_categoriaproducto.setText("Categoría Producto");
+        m_categoriaproducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_categoriaproductoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(m_categoriaproducto);
+
+        m_ingresarproductos.setText("Ingresar Productos");
+        m_ingresarproductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_ingresarproductosActionPerformed(evt);
+            }
+        });
+        jMenu2.add(m_ingresarproductos);
+
+        m_ingresarclientes.setText("Ingresar Clientes");
+        jMenu2.add(m_ingresarclientes);
+
+        m_ventas.setText("Ventas");
+        jMenu2.add(m_ventas);
+
+        m_agendarmensajes.setText("Agendar Mensajes");
+        jMenu2.add(m_agendarmensajes);
+
+        m_generarcomprobante.setText("Generar Comprobante");
+        jMenu2.add(m_generarcomprobante);
+
+        m_gestiondeinventario.setText("Gestión de Inventario");
+        jMenu2.add(m_gestiondeinventario);
+
+        m_agregarusuarios.setText("Agregar Usuarios");
+        jMenu2.add(m_agregarusuarios);
+
+        m_verusuarios.setText("Ver Usuarios");
+        jMenu2.add(m_verusuarios);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnprimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprimeroActionPerformed
-        Primero p1 = new Primero();        
+    private void m_ingresarproductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_ingresarproductosActionPerformed
+        IngresarProducto p1 = new IngresarProducto();        
         p1.setSize(401, 251);
         p1.setLocation(0, 0);
 
@@ -140,19 +183,29 @@ public class Inicio extends javax.swing.JFrame {
         content.add(p1, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
+    }//GEN-LAST:event_m_ingresarproductosActionPerformed
 
-    }//GEN-LAST:event_btnprimeroActionPerformed
+    private void m_categoriaproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_categoriaproductoActionPerformed
+        FrmCategoriaProducto formulario = new FrmCategoriaProducto();
+        formulario.setVisible(true);
 
-    private void btnsegundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsegundoActionPerformed
-        Segundo p1 = new Segundo();        
-        p1.setSize(401, 251);
-        p1.setLocation(0, 0);
+//        CategoriaProducto p1 = new CategoriaProducto();        
+//        p1.setSize(401, 251);
+//        p1.setLocation(0, 0);
+//
+//        content.removeAll();
+//        content.add(p1, BorderLayout.CENTER);
+//        content.revalidate();
+//        content.repaint();
+    }//GEN-LAST:event_m_categoriaproductoActionPerformed
 
-        content.removeAll();
-        content.add(p1, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
-    }//GEN-LAST:event_btnsegundoActionPerformed
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void m_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_cerrarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_m_cerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,9 +243,20 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnprimero;
-    private javax.swing.JButton btnsegundo;
     private javax.swing.JPanel content;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem m_agendarmensajes;
+    private javax.swing.JMenuItem m_agregarusuarios;
+    private javax.swing.JMenuItem m_categoriaproducto;
+    private javax.swing.JMenuItem m_cerrar;
+    private javax.swing.JMenuItem m_generarcomprobante;
+    private javax.swing.JMenuItem m_gestiondeinventario;
+    private javax.swing.JMenuItem m_ingresarclientes;
+    private javax.swing.JMenuItem m_ingresarproductos;
+    private javax.swing.JMenuItem m_ventas;
+    private javax.swing.JMenuItem m_verusuarios;
     // End of variables declaration//GEN-END:variables
 }
