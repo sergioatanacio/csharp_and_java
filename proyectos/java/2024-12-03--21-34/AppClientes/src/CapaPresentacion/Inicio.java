@@ -174,14 +174,14 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_ingresarproductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_ingresarproductosActionPerformed
-        IngresarProducto p1 = new IngresarProducto();        
-        p1.setSize(401, 251);
-        p1.setLocation(0, 0);
-
-        content.removeAll();
-        content.add(p1, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+//        IngresarProducto p1 = new IngresarProducto();        
+//        p1.setSize(401, 251);
+//        p1.setLocation(0, 0);
+//
+//        content.removeAll();
+//        content.add(p1, BorderLayout.CENTER);
+//        content.revalidate();
+//        content.repaint();
     }//GEN-LAST:event_m_ingresarproductosActionPerformed
 
     private void m_categoriaproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_categoriaproductoActionPerformed
