@@ -23,19 +23,25 @@ public class DatosCategoriaProducto {
     }
 
     // Método para insertar una categoría
-    public boolean insertarCategoria(EntidadCategoriaProducto categoria) throws SQLException {
+    public boolean insertarCategoria(EntidadCategoriaProducto categoria)  {
         String sql = "INSERT INTO Categoria (IdCategoria, Descripcion, Estado, FechaRegistro) VALUES (?, ?, ?, ?)";
+        
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getIdCategoria());
             stmt.setString(2, categoria.getDescripcion());
             stmt.setBoolean(3, categoria.isEstado());
             stmt.setTimestamp(4, Timestamp.valueOf(categoria.getFechaRegistro()));
             return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            // Manejo de la excepción
+            e.printStackTrace(); // Puedes reemplazar esto con un logger o una acción más adecuada
+            
         }
+        return false;
     }
 
     // Método para actualizar una categoría
-    public boolean actualizarCategoria(EntidadCategoriaProducto categoria) throws SQLException {
+    public boolean actualizarCategoria(EntidadCategoriaProducto categoria)  {
         String sql = "UPDATE Categoria SET Descripcion = ?, Estado = ?, FechaRegistro = ? WHERE IdCategoria = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getDescripcion());
@@ -43,7 +49,12 @@ public class DatosCategoriaProducto {
             stmt.setTimestamp(3, Timestamp.valueOf(categoria.getFechaRegistro()));
             stmt.setString(4, categoria.getIdCategoria());
             return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            // Manejo de la excepción
+            e.printStackTrace(); // Puedes reemplazar esto con un logger o una acción más adecuada
+            
         }
+        return false;
     }
 
     // Método para buscar una categoría por ID

@@ -443,6 +443,11 @@ public class FrmCategoriaProducto extends javax.swing.JFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Acciones"));
 
         btn_crear.setText("Crear");
+        btn_crear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_crearActionPerformed(evt);
+            }
+        });
 
         btn_modificar.setText("Modificar");
 
@@ -549,6 +554,20 @@ public class FrmCategoriaProducto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
+        String var_idcategoria     =   txt_idcategoria.getText();
+        String var_nombre          =   txt_nombre.getText();
+        Boolean var_estado          =   cbx_estado.isSelected();
+        String var_descripcion     =   txt_descripcion.getText();
+        
+        EntidadCategoriaProducto e_CatProd = new EntidadCategoriaProducto(null, var_nombre, var_descripcion, var_estado, null );
+        
+        NegocioCategoriaProducto n_CatProd = new NegocioCategoriaProducto(this.usuario);
+        n_CatProd.insertarCategoriaProducto(e_CatProd);
+
+
+    }//GEN-LAST:event_btn_crearActionPerformed
 
     /**
      * @param args the command line arguments

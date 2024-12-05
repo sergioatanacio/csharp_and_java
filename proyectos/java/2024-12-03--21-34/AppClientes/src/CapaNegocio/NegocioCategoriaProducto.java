@@ -28,5 +28,8 @@ public class NegocioCategoriaProducto {
     public List<EntidadCategoriaProducto> listarCategoriaProductos()  {
         return datosCategoriaProducto.listarTodasLasCategorias();
     }
+    public void insertarCategoriaProducto(EntidadCategoriaProducto arg)  {
+        datosCategoriaProducto.insertarCategoria(arg);
+    }
 
 }
