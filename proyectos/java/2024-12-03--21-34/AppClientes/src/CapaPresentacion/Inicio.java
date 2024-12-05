@@ -6,6 +6,7 @@ package CapaPresentacion;
 
 
 import CapaEntidad.EntidadUsuario;
+import CapaNegocio.NegocioCategoriaProducto;
 import Paneles.FrmCategoriaProducto;
 import java.awt.BorderLayout;
 import javax.swing.SwingUtilities;
@@ -20,12 +21,14 @@ public class Inicio extends javax.swing.JFrame {
      * Creates new form Inicio
      * @param usuario
      */
+    private EntidadUsuario usuario;
+    
     public Inicio() {
         this(null);
     }
 
-    public Inicio(EntidadUsuario usuario) {
-        if (usuario == null) {
+    public Inicio(EntidadUsuario usuario_login) {
+        if (usuario_login == null) {
 
             SwingUtilities.invokeLater(() -> {
                 // Mostrar el login
@@ -38,14 +41,12 @@ public class Inicio extends javax.swing.JFrame {
             
             
         } else {
-            // Si el usuario no es null, realizar las acciones correspondientes
+            this.usuario = usuario_login;
             initComponents();
-//            CategoriaProducto p1 = new CategoriaProducto();
-//            p1.setSize(401, 500);
-//            p1.setLocation(0, 0);
-//            setLocationRelativeTo(null);
-            // Aquí puedes procesar el usuario (realizar las acciones necesarias)
-            // procesarUsuario(usuario);
+            lbl_nombreusuario.setText(usuario.getNombre() + " " + usuario.getApellidoP()  );
+            
+//            NegocioCategoriaProducto catProd = new NegocioCategoriaProducto(this.usuario);
+//            catProd.listarCategoriaProductos();
         }
 
 
@@ -62,6 +63,8 @@ public class Inicio extends javax.swing.JFrame {
 
         jMenuItem4 = new javax.swing.JMenuItem();
         content = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        lbl_nombreusuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         m_cerrar = new javax.swing.JMenuItem();
@@ -90,8 +93,12 @@ public class Inicio extends javax.swing.JFrame {
         );
         contentLayout.setVerticalGroup(
             contentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 415, Short.MAX_VALUE)
+            .addGap(0, 370, Short.MAX_VALUE)
         );
+
+        jLabel1.setText("Hola:");
+
+        lbl_nombreusuario.setText("Usuario");
 
         jMenu1.setText("Archivo");
 
@@ -161,12 +168,22 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(lbl_nombreusuario)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(content, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lbl_nombreusuario))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addComponent(content, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -174,28 +191,14 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_ingresarproductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_ingresarproductosActionPerformed
-//        IngresarProducto p1 = new IngresarProducto();        
-//        p1.setSize(401, 251);
-//        p1.setLocation(0, 0);
-//
-//        content.removeAll();
-//        content.add(p1, BorderLayout.CENTER);
-//        content.revalidate();
-//        content.repaint();
+
     }//GEN-LAST:event_m_ingresarproductosActionPerformed
 
     private void m_categoriaproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_categoriaproductoActionPerformed
-        FrmCategoriaProducto formulario = new FrmCategoriaProducto();
+        FrmCategoriaProducto formulario = new FrmCategoriaProducto(this.usuario);
         formulario.setVisible(true);
 
-//        CategoriaProducto p1 = new CategoriaProducto();        
-//        p1.setSize(401, 251);
-//        p1.setLocation(0, 0);
-//
-//        content.removeAll();
-//        content.add(p1, BorderLayout.CENTER);
-//        content.revalidate();
-//        content.repaint();
+
     }//GEN-LAST:event_m_categoriaproductoActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
@@ -243,10 +246,12 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel content;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JLabel lbl_nombreusuario;
     private javax.swing.JMenuItem m_agendarmensajes;
     private javax.swing.JMenuItem m_agregarusuarios;
     private javax.swing.JMenuItem m_categoriaproducto;

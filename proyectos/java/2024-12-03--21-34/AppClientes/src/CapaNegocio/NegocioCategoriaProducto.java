@@ -21,11 +21,11 @@ public class NegocioCategoriaProducto {
     private final DatosCategoriaProducto datosCategoriaProducto;
 
     // Constructor que recibe la capa DatosUsuario
-    public NegocioCategoriaProducto() throws SQLException {
+    public NegocioCategoriaProducto(EntidadUsuario parametro_usuario) {
        Connection connection = DatosConnection.getConnection();
-        this.datosCategoriaProducto = new DatosCategoriaProducto(connection);
+        this.datosCategoriaProducto = new DatosCategoriaProducto(connection, parametro_usuario);
     }
-    public List<EntidadCategoriaProducto> listarCategoriaProductos() throws SQLException {
+    public List<EntidadCategoriaProducto> listarCategoriaProductos()  {
         return datosCategoriaProducto.listarTodasLasCategorias();
     }
 

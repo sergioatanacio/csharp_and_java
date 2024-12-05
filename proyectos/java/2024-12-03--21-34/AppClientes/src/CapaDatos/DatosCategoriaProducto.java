@@ -9,17 +9,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import CapaEntidad.EntidadCategoriaProducto;
-// import CapaEntidad.EntidadUsuario;
+import CapaEntidad.EntidadUsuario;
 
 public class DatosCategoriaProducto {
 
     private final Connection connection;
-    // private EntidadUsuario e_usuario;
+    private EntidadUsuario e_usuario;
 
     // Constructor que recibe la conexión a la base de datos
-    public DatosCategoriaProducto(Connection connection/*, EntidadUsuario parametro_usuario*/) {
+    public DatosCategoriaProducto(Connection connection, EntidadUsuario parametro_usuario) {
         this.connection = connection;
-        // this.e_usuario = parametro_usuario;
+        this.e_usuario = parametro_usuario;
     }
 
     // Método para insertar una categoría
@@ -81,24 +81,33 @@ public class DatosCategoriaProducto {
             return stmt.executeUpdate() > 0;
         }
     }
-
     // Método para listar todas las categorías
-    public List<EntidadCategoriaProducto> listarTodasLasCategorias() throws SQLException {
+    public List<EntidadCategoriaProducto> listarTodasLasCategorias() {
         List<EntidadCategoriaProducto> categorias = new ArrayList<>();
         String sql = "SELECT * FROM Categoria";
+
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
                 categorias.add(mapCategoria(rs));
             }
+
+        } catch (SQLException e) {
+            // Manejo de la excepción
+            e.printStackTrace(); // Puedes reemplazar esto con un logger o una acción más adecuada
+            return null; // Retorna null en caso de error
         }
-        return categorias;
+
+        // Retorna null si la lista está vacía
+        return categorias.isEmpty() ? null : categorias;
     }
 
     // Método auxiliar para mapear un ResultSet a un objeto Categoría
     private EntidadCategoriaProducto mapCategoria(ResultSet rs) throws SQLException {
         EntidadCategoriaProducto categoria = new EntidadCategoriaProducto();
         categoria.setIdCategoria(rs.getString("IdCategoria"));
+        categoria.setNombre(rs.getString("Nombre"));
         categoria.setDescripcion(rs.getString("Descripcion"));
         categoria.setEstado(rs.getBoolean("Estado"));
         categoria.setFechaRegistro(rs.getString("FechaRegistro"));

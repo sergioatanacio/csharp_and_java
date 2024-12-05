@@ -30,6 +30,12 @@ public class EntidadCategoriaProducto {
     public String getIdCategoria() {
         return idCategoria;
     }
+    public String getNombre() {
+        return nombre;
+    }    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public void setIdCategoria(String idCategoria) {
         this.idCategoria = idCategoria;
