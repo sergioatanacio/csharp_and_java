@@ -1,3 +1,9 @@
+package Presentacion;
+
+import Entidad.Role;
+import Entidad.User;
+import Datos.RoleDAO;
+import Datos.UserDAO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
@@ -5,8 +11,9 @@ import java.util.List;
 
 public class UserForm extends JFrame implements ActionListener {
     // Componentes de la interfaz
-    private JLabel lName, lEmail, lCountry, lId;
-    private JTextField tfName, tfEmail, tfCountry, tfId;
+    private JLabel lId, lName, lEmail, lCountry, lRole;
+    private JTextField tfId, tfName, tfEmail, tfCountry;
+    private JComboBox<Role> cbRoles;
     private JButton btnSave, btnUpdate, btnDelete, btnView;
     private JTable table;
     private JScrollPane scrollPane;
@@ -41,29 +48,37 @@ public class UserForm extends JFrame implements ActionListener {
         tfCountry = new JTextField();
         tfCountry.setBounds(130, 170, 200, 30);
 
+        lRole = new JLabel("Rol:");
+        lRole.setBounds(20, 220, 100, 30);
+        cbRoles = new JComboBox<>();
+        cbRoles.setBounds(130, 220, 200, 30);
+
+        // Cargar roles en el JComboBox
+        loadRoles();
+
         btnSave = new JButton("Guardar");
-        btnSave.setBounds(20, 220, 100, 30);
+        btnSave.setBounds(20, 270, 100, 30);
         btnSave.addActionListener(this);
 
         btnUpdate = new JButton("Actualizar");
-        btnUpdate.setBounds(130, 220, 100, 30);
+        btnUpdate.setBounds(130, 270, 100, 30);
         btnUpdate.addActionListener(this);
 
         btnDelete = new JButton("Eliminar");
-        btnDelete.setBounds(240, 220, 100, 30);
+        btnDelete.setBounds(240, 270, 100, 30);
         btnDelete.addActionListener(this);
 
         btnView = new JButton("Ver Todos");
-        btnView.setBounds(350, 220, 100, 30);
+        btnView.setBounds(350, 270, 100, 30);
         btnView.addActionListener(this);
 
         // Tabla para mostrar los datos
         table = new JTable();
         scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(20, 270, 740, 280);
+        scrollPane.setBounds(20, 320, 740, 230);
 
         // Configurar el modelo de la tabla
-        String[] columnNames = { "ID", "Nombre", "Email", "País" };
+        String[] columnNames = { "ID", "Nombre", "Email", "País", "Rol" };
         DefaultTableModel model = new DefaultTableModel(columnNames, 0) {
             // Hacer que las celdas no sean editables directamente
             @Override
@@ -113,6 +128,7 @@ public class UserForm extends JFrame implements ActionListener {
         add(lName); add(tfName);
         add(lEmail); add(tfEmail);
         add(lCountry); add(tfCountry);
+        add(lRole); add(cbRoles);
         add(btnSave); add(btnUpdate); add(btnDelete); add(btnView);
         add(scrollPane);
 
@@ -131,6 +147,17 @@ public class UserForm extends JFrame implements ActionListener {
         tfName.setText("");
         tfEmail.setText("");
         tfCountry.setText("");
+        cbRoles.setSelectedIndex(-1); // Deseleccionar el JComboBox
+    }
+
+    // Método para cargar los roles en el JComboBox
+    private void loadRoles() {
+        List<Role> roles = new RoleDAO().getAllRoles();
+        cbRoles.removeAllItems(); // Limpiar antes de cargar
+        for (Role role : roles) {
+            cbRoles.addItem(role);
+        }
+        cbRoles.setSelectedIndex(-1); // Deseleccionar por defecto
     }
 
     // Método para cargar los datos en la tabla
@@ -144,7 +171,8 @@ public class UserForm extends JFrame implements ActionListener {
                 user.getId(),
                 user.getName(),
                 user.getEmail(),
-                user.getCountry()
+                user.getCountry(),
+                user.getRoleName() // Agregar el nombre del rol
             };
             model.addRow(rowData);
         }
@@ -162,12 +190,21 @@ public class UserForm extends JFrame implements ActionListener {
                 String name = table.getValueAt(selectedRow, 1).toString();
                 String email = table.getValueAt(selectedRow, 2).toString();
                 String country = table.getValueAt(selectedRow, 3).toString();
+                String roleName = table.getValueAt(selectedRow, 4).toString();
 
                 // Cargar los datos en los campos de texto
                 tfId.setText(id);
                 tfName.setText(name);
                 tfEmail.setText(email);
                 tfCountry.setText(country);
+
+                // Seleccionar el rol en el JComboBox
+                for (int i = 0; i < cbRoles.getItemCount(); i++) {
+                    if (cbRoles.getItemAt(i).getRoleName().equals(roleName)) {
+                        cbRoles.setSelectedIndex(i);
+                        break;
+                    }
+                }
 
                 System.out.println("Fila seleccionada: ID=" + id + ", Nombre=" + name);
             } catch (Exception ex) {
@@ -186,14 +223,16 @@ public class UserForm extends JFrame implements ActionListener {
             String name = tfName.getText().trim();
             String email = tfEmail.getText().trim();
             String country = tfCountry.getText().trim();
+            Role selectedRole = (Role) cbRoles.getSelectedItem();
 
-            if (name.isEmpty() || email.isEmpty() || country.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.");
+            if (name.isEmpty() || email.isEmpty() || country.isEmpty() || selectedRole == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos y selecciona un rol.");
             } else {
                 User user = new User();
                 user.setName(name);
                 user.setEmail(email);
                 user.setCountry(country);
+                user.setRoleId(selectedRole.getRoleId());
 
                 int status = new UserDAO().saveUser(user);
                 if (status > 0) {
@@ -212,8 +251,9 @@ public class UserForm extends JFrame implements ActionListener {
             String name = tfName.getText().trim();
             String email = tfEmail.getText().trim();
             String country = tfCountry.getText().trim();
+            Role selectedRole = (Role) cbRoles.getSelectedItem();
 
-            if (idText.isEmpty() || name.isEmpty() || email.isEmpty() || country.isEmpty()) {
+            if (idText.isEmpty() || name.isEmpty() || email.isEmpty() || country.isEmpty() || selectedRole == null) {
                 JOptionPane.showMessageDialog(this, "Por favor, selecciona un usuario de la tabla y completa todos los campos.");
             } else {
                 try {
@@ -223,6 +263,7 @@ public class UserForm extends JFrame implements ActionListener {
                     user.setName(name);
                     user.setEmail(email);
                     user.setCountry(country);
+                    user.setRoleId(selectedRole.getRoleId());
 
                     int status = new UserDAO().updateUser(user);
                     if (status > 0) {
