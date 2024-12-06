@@ -4,6 +4,7 @@
  */
 package crudinterfaz;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -11,37 +12,93 @@ import javax.swing.table.DefaultTableModel;
  * @author ANGEL
  */
 public class Crud extends javax.swing.JFrame {
-    DefaultTableModel dtm = new DefaultTableModel();
 
+    DefaultTableModel dtm = new DefaultTableModel();
+    PersonaDAO dao = new PersonaDAO();
     /**
      * Creates new form Crud
      */
     public Crud() {
         initComponents();
-        String[] titulo = new String[]{"Id:", "Nombre:", "Apellido"};
-        dtm.setColumnIdentifiers(titulo);;
-        
-        tbldatos.setModel(dtm);        
+        String[] titulo = new String[]{"Id", "Nombre", "Apellido"};
+        dtm.setColumnIdentifiers(titulo);
+        tbldatos.setModel(dtm); 
+        cargarDatos(); // Cargar datos al iniciar la ventana        
     }
-
+    void cargarDatos(){
+        limpiartabla();
+        List<Persona> lista = dao.listar();
+        for (Persona p : lista) {
+            dtm.addRow(new Object[]{p.getId(), p.getNombre(), p.getApellido()});
+        }
+    }
     void agregar(){
-        dtm.addRow(new Object[]{
-            txtid.getText(), txtnombre.getText(), txtapellido.getText()
-        });
+        String nombre = txtnombre.getText().trim();
+        String apellido = txtapellido.getText().trim();
+
+        if(nombre.isEmpty() || apellido.isEmpty()){
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.");
+            return;
+        }
+
+        Persona p = new Persona();
+        p.setNombre(nombre);
+        p.setApellido(apellido);
+        if(dao.insertar(p)){
+            cargarDatos();
+            limpiarCampos();
+            javax.swing.JOptionPane.showMessageDialog(this, "Registro agregado exitosamente.");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al insertar en la base de datos.");
+        }
     }
     
     void eliminar(){
-        int fila=tbldatos.getSelectedRow();
-        dtm.removeRow(fila);
-        System.out.println(fila);
+        int fila = tbldatos.getSelectedRow();
+        if (fila >= 0) {
+            int confirm = javax.swing.JOptionPane.showConfirmDialog(this, "¿Estás seguro de eliminar este registro?", "Confirmar Eliminación", javax.swing.JOptionPane.YES_NO_OPTION);
+            if(confirm == javax.swing.JOptionPane.YES_OPTION){
+                int id = Integer.parseInt(tbldatos.getValueAt(fila, 0).toString());
+                if(dao.eliminar(id)){
+                    cargarDatos();
+                    limpiarCampos();
+                    javax.swing.JOptionPane.showMessageDialog(this, "Registro eliminado exitosamente.");
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el registro.");
+                }
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila para eliminar.");
+        }
     }
     
     void actualizar(){
-        int fila=tbldatos.getSelectedRow();
-        dtm.setValueAt(txtid.getText(), fila,0);
-        dtm.setValueAt(txtnombre.getText(), fila,1);
-        dtm.setValueAt(txtapellido.getText(), fila,2);
-        
+        int fila = tbldatos.getSelectedRow();
+        if (fila >= 0) {
+            String nombre = txtnombre.getText().trim();
+            String apellido = txtapellido.getText().trim();
+
+            if(nombre.isEmpty() || apellido.isEmpty()){
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.");
+                return;
+            }
+
+            int id = Integer.parseInt(txtid.getText());
+
+            Persona p = new Persona();
+            p.setId(id);
+            p.setNombre(nombre);
+            p.setApellido(apellido);
+            if(dao.actualizar(p)){
+                cargarDatos();
+                limpiarCampos();
+                javax.swing.JOptionPane.showMessageDialog(this, "Registro actualizado exitosamente.");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el registro.");
+            }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, selecciona una fila para actualizar.");
+        } 
     }
     void limpiartabla(){
         int filas = dtm.getRowCount();
@@ -49,7 +106,12 @@ public class Crud extends javax.swing.JFrame {
             dtm.removeRow(0);
         }
     }
-    
+    void limpiarCampos(){
+        txtid.setText("");
+        txtnombre.setText("");
+        txtapellido.setText("");
+        tbldatos.clearSelection();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -66,6 +128,7 @@ public class Crud extends javax.swing.JFrame {
         btneliminar = new javax.swing.JButton();
         btnactualizar = new javax.swing.JButton();
         btnlimpiar = new javax.swing.JButton();
+        btnCargar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,18 +138,33 @@ public class Crud extends javax.swing.JFrame {
 
         jLabel3.setText("Apellidos:");
 
+        txtid.setEditable(false);
+
         tbldatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nombre", "Apellido"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tbldatos.setName(""); // NOI18N
+        tbldatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbldatosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbldatos);
 
         btnagregar.setText("Añadir");
@@ -117,6 +195,13 @@ public class Crud extends javax.swing.JFrame {
             }
         });
 
+        btnCargar.setText("Cargar");
+        btnCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -134,7 +219,9 @@ public class Crud extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCargar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(60, 60, 60)
@@ -147,7 +234,7 @@ public class Crud extends javax.swing.JFrame {
                         .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnlimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +248,8 @@ public class Crud extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCargar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
@@ -170,7 +258,7 @@ public class Crud extends javax.swing.JFrame {
                     .addComponent(btneliminar)
                     .addComponent(btnactualizar)
                     .addComponent(btnlimpiar))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -191,6 +279,19 @@ public class Crud extends javax.swing.JFrame {
     private void btnlimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiarActionPerformed
         limpiartabla();
     }//GEN-LAST:event_btnlimpiarActionPerformed
+
+    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
+        cargarDatos();
+    }//GEN-LAST:event_btnCargarActionPerformed
+
+    private void tbldatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbldatosMouseClicked
+        int fila = tbldatos.getSelectedRow();
+        if(fila >= 0){
+            txtid.setText(tbldatos.getValueAt(fila, 0).toString());
+            txtnombre.setText(tbldatos.getValueAt(fila, 1).toString());
+            txtapellido.setText(tbldatos.getValueAt(fila, 2).toString());
+        }
+    }//GEN-LAST:event_tbldatosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -228,6 +329,7 @@ public class Crud extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnactualizar;
     private javax.swing.JButton btnagregar;
     private javax.swing.JButton btneliminar;
