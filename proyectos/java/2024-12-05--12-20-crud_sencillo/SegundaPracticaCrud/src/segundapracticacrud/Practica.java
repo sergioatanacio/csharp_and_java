@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package segundapracticacrud;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,30 +14,45 @@ public class Practica extends javax.swing.JFrame {
 
     DefaultTableModel dtm = new DefaultTableModel();
     PersonaDAO dao = new PersonaDAO();
+    private DepartamentoDAO departamentoDAO = new DepartamentoDAO();
+    private List<Departamento> listaDepartamentos = new ArrayList<>();
+    
     public Practica() {
         initComponents();
-        String[] titulo = new String[]{"Id", "Nombre", "Apellido"};
+        String[] titulo = new String[]{"Id", "Nombre", "Apellido", "Departamento"};
         dtm.setColumnIdentifiers(titulo);
         tbldatos.setModel(dtm);
         cargardatos();
+        cargarDepartamentos();
+        
+//        cmbDepartamento.setModel(new DefaultComboBoxModel<Departamento>());
     }
     void cargardatos(){
         limpiartabla();
         List<Persona> lista = dao.listar();
         for(Persona p: lista){
-            dtm.addRow(new Object[]{p.getId(), p.getNombre(), p.getApellido()});
+            dtm.addRow(new Object[]{
+                p.getId(),
+                p.getNombre(), 
+                p.getApellido(),
+                p.getDepartamento() != null ? p.getDepartamento().getNombre() : "N/A"
+            });
         }
     }
     void agregar(){
         String nombre = txtnombre.getText().trim();
         String apellido = txtapellido.getText().trim();
-        if(nombre.isEmpty() || apellido.isEmpty()){
+        Departamento departamento = (Departamento) cmbDepartamento.getSelectedItem();
+        
+        if(nombre.isEmpty() || apellido.isEmpty() || departamento == null){
             javax.swing.JOptionPane.showMessageDialog(this, "Por favor, completa los campos");
             return;
         }
         Persona p = new Persona();
         p.setNombre(nombre);
         p.setApellido(apellido);
+        p.setDepartamento(departamento);
+        
         if(dao.insertar(p)){
             cargardatos();
             limpiarCampos();
@@ -71,15 +85,20 @@ public class Practica extends javax.swing.JFrame {
         if(fila >= 0){
             String nombre = txtnombre.getText().trim();
             String apellido = txtapellido.getText().trim();
-            if(nombre.isEmpty() || apellido.isEmpty()){
+            Departamento departamento = (Departamento) cmbDepartamento.getSelectedItem();
+            
+            if(nombre.isEmpty() || apellido.isEmpty() || departamento == null){
                 javax.swing.JOptionPane.showMessageDialog(this, "Por favor completa todos los campos");
                 return;
             }
             int id = Integer.parseInt(txtid.getText());
             Persona p = new Persona();
+            
             p.setId(id);
             p.setNombre(nombre);
             p.setApellido(apellido);
+            p.setDepartamento(departamento);            
+            
             if(dao.actualizar(p)){
                 cargardatos();
                 limpiarCampos();
@@ -102,8 +121,18 @@ public class Practica extends javax.swing.JFrame {
         txtid.setText("");
         txtnombre.setText("");
         txtapellido.setText("");
+        cmbDepartamento.setSelectedIndex(-1); // Selección vacía
         tbldatos.clearSelection();
     }
+    
+    void cargarDepartamentos(){
+        listaDepartamentos = departamentoDAO.listar();
+        cmbDepartamento.removeAllItems();
+        for(Departamento d : listaDepartamentos){
+            cmbDepartamento.addItem(d);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -123,25 +152,27 @@ public class Practica extends javax.swing.JFrame {
         btneliminar = new javax.swing.JButton();
         btncargar = new javax.swing.JButton();
         btnlimpiart = new javax.swing.JButton();
+        cmbDepartamento = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tbldatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Apellido"
+                "Id", "Nombre", "Apellido", "Departamento"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true
+                false, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -271,6 +302,14 @@ public class Practica extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        cmbDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDepartamentoActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Departamento:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -281,9 +320,12 @@ public class Practica extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbDepartamento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -292,10 +334,14 @@ public class Practica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -307,6 +353,16 @@ public class Practica extends javax.swing.JFrame {
             txtid.setText(tbldatos.getValueAt(fila,0).toString());
             txtnombre.setText(tbldatos.getValueAt(fila,1).toString());
             txtapellido.setText(tbldatos.getValueAt(fila,2).toString());
+
+            String deptNombre = tbldatos.getValueAt(fila,3).toString();
+            for(int i = 0; i < cmbDepartamento.getItemCount(); i++){
+                Departamento d = cmbDepartamento.getItemAt(i);
+                if(d.getNombre().equals(deptNombre)){
+                    cmbDepartamento.setSelectedIndex(i);
+                    break;
+                }
+                    
+            }
         }
     }//GEN-LAST:event_tbldatosMouseClicked
 
@@ -329,6 +385,10 @@ public class Practica extends javax.swing.JFrame {
     private void btnlimpiartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlimpiartActionPerformed
         limpiartabla();
     }//GEN-LAST:event_btnlimpiartActionPerformed
+
+    private void cmbDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDepartamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDepartamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -371,9 +431,11 @@ public class Practica extends javax.swing.JFrame {
     private javax.swing.JButton btncargar;
     private javax.swing.JButton btneliminar;
     private javax.swing.JButton btnlimpiart;
+    private javax.swing.JComboBox<String> cmbDepartamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
