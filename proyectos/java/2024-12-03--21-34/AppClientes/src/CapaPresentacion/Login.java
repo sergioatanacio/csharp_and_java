@@ -21,7 +21,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
         establecerValoresPorDefecto();
     }
     private void establecerValoresPorDefecto() {

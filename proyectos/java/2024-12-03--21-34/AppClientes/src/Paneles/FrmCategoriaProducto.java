@@ -27,6 +27,7 @@ public class FrmCategoriaProducto extends javax.swing.JFrame {
         catProd.listarCategoriaProductos();
         
         initComponents();
+        this.setLocationRelativeTo(null);
         cargarDatosEnTabla();
     }
     

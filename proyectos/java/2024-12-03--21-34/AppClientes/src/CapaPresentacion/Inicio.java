@@ -34,7 +34,7 @@ public class Inicio extends javax.swing.JFrame {
                 // Mostrar el login
                 Login formulario = new Login();
                 formulario.setVisible(true);
-
+                
                 // Disponer el formulario actual
                 this.dispose();
             });
@@ -43,6 +43,7 @@ public class Inicio extends javax.swing.JFrame {
         } else {
             this.usuario = usuario_login;
             initComponents();
+            this.setLocationRelativeTo(null);
             lbl_nombreusuario.setText(usuario.getNombre() + " " + usuario.getApellidoP()  );
             
 //            NegocioCategoriaProducto catProd = new NegocioCategoriaProducto(this.usuario);
