@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 
 
 
-public class EntidadUsuario {
-    private String idUsuario;
+public class EntidadUsuario implements Entidad {
+    private int idUsuario;
     private String dni;
     private String apellidoP;
     private String apellidoM;
@@ -26,7 +26,7 @@ public class EntidadUsuario {
     public EntidadUsuario() {}
 
     // Constructor completo
-    public EntidadUsuario(String idUsuario, String dni, String apellidoP, String apellidoM, String nombre, String direccion,
+    public EntidadUsuario(int idUsuario, String dni, String apellidoP, String apellidoM, String nombre, String direccion,
                    String telefono, String correo, String contrasena, String idRol, boolean estado, LocalDateTime fechaRegistro) {
         this.idUsuario = idUsuario;
         this.dni = dni;
@@ -43,11 +43,13 @@ public class EntidadUsuario {
     }
 
     // Getters y Setters
-    public String getIdUsuario() {
+    @Override
+    public int getId() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    @Override
+    public void setId(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 

@@ -9,9 +9,9 @@ import java.time.LocalDate;
 
 
 
-public class EntidadProducto {
+public class EntidadProducto  implements Entidad  {
 
-    private String idProducto;
+    private int idProducto;
     private String codigoBarras;
     private String nombreProducto;
     private String descripcion;
@@ -33,7 +33,7 @@ public class EntidadProducto {
     public EntidadProducto() {}
 
     // Constructor completo
-    public EntidadProducto(String idProducto, String codigoBarras, String nombreProducto, String descripcion, 
+    public EntidadProducto(int idProducto, String codigoBarras, String nombreProducto, String descripcion, 
                     String idCategoria, String unidadMedida, BigDecimal precioCompra, BigDecimal precioVenta,
                     String marca, String modelo, int stock, LocalDate fechaVencimiento, String idProveedor,
                     String idUbicacion, String imagen, boolean estado, LocalDateTime fechaRegistro) {
@@ -57,11 +57,13 @@ public class EntidadProducto {
     }
 
     // Getters y Setters
-    public String getIdProducto() {
+    @Override
+    public int getId() {
         return idProducto;
     }
 
-    public void setIdProducto(String idProducto) {
+    @Override
+    public void setId(int idProducto) {
         this.idProducto = idProducto;
     }
 

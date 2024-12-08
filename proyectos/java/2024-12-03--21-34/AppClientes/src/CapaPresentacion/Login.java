@@ -114,58 +114,19 @@ public class Login extends javax.swing.JFrame {
             return;
         }
 
-        try {
-            NegocioUsuario negocioUsuario = new NegocioUsuario();
-            EntidadRespuesta resultado = negocioUsuario.iniciarSesion(usuario, password);
-
-            if (resultado.isSuccess()) {
-                EntidadUsuario usuarioDevuelto = (EntidadUsuario) resultado.getDatos().get(0);
-                Inicio formulario = new Inicio(usuarioDevuelto);
-                formulario.setVisible(true);
-                this.dispose();
-            } else {
-                NegocioAlerta.mostrar(resultado.getMensaje());
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error al conectar con la base de datos.", "Error", JOptionPane.ERROR_MESSAGE);
-            // Opcional: Log del error
-            // Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
+        NegocioUsuario negocioUsuario = new NegocioUsuario(new EntidadUsuario()); // Opcional: Log del error
+        // Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
+        EntidadRespuesta resultado = negocioUsuario.iniciarSesion(usuario, password);
+        if (resultado.isSuccess()) {
+            EntidadUsuario usuarioDevuelto = (EntidadUsuario) resultado.getDatos().get(0);
+            Inicio formulario = new Inicio(usuarioDevuelto);
+            formulario.setVisible(true);
+            this.dispose();
+        } else {
+            NegocioAlerta.mostrar(resultado.getMensaje());
         }
     }
-    /**
-     * @param args the command line arguments
-     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new Login().setVisible(true);
-//            }
-//        });
-//    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btningresar;

@@ -10,8 +10,8 @@ public class DatosConnection {
 
     // Parámetros de conexión
     private static final String URL = "jdbc:mysql://searchdominio.online:3306/searchdo_gio";
-    private static final String USUARIO = "searchdo_searchdo";
-    private static final String CONTRASENA = "searchdo_searchdo";
+    private static final String USUARIO = "searchdo_searchdo_searchdo";
+    private static final String CONTRASENA = "searchdo_searchdo_searchdo";
 
     // Logger para registrar errores
     private static final Logger LOGGER = Logger.getLogger(DatosConnection.class.getName());

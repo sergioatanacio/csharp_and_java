@@ -13,7 +13,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.TableRowSorter;
 
 
-
 /**
  *
  * @author ANGEL
@@ -36,7 +35,7 @@ public class Crud extends javax.swing.JFrame {
         tbldatos.setModel(dtm); 
 
         // Configurar el TableRowSorter
-        sorter = new TableRowSorter<>(dtm);
+        sorter = new TableRowSorter<>(dtm);                                                                   
         tbldatos.setRowSorter(sorter);
 
         // Agregar el DocumentListener al campo de búsqueda
@@ -250,6 +249,12 @@ public class Crud extends javax.swing.JFrame {
 
         jLabel4.setText("Buscar");
 
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -352,6 +357,10 @@ public class Crud extends javax.swing.JFrame {
             txtapellido.setText(tbldatos.getValueAt(fila, 2).toString());
         }
     }//GEN-LAST:event_tbldatosMouseClicked
+
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     /**
      * @param args the command line arguments
