@@ -8,8 +8,7 @@ public class EntidadRespuesta<T> {
     private List<T> datos;   // Datos opcionales, puede contener una lista de objetos genéricos
 
     // Constructor por defecto
-    public EntidadRespuesta() {
-    }
+    public EntidadRespuesta() {}
 
     // Constructor con parámetros
     public EntidadRespuesta(boolean success, String mensaje, List<T> datos) {

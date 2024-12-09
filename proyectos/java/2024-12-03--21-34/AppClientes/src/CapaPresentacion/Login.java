@@ -116,14 +116,13 @@ public class Login extends javax.swing.JFrame {
 
         NegocioUsuario negocioUsuario = new NegocioUsuario(new EntidadUsuario()); // Opcional: Log del error
         // Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
-        EntidadRespuesta resultado = negocioUsuario.iniciarSesion(usuario, password);
-        if (resultado.isSuccess()) {
-            EntidadUsuario usuarioDevuelto = (EntidadUsuario) resultado.getDatos().get(0);
+        EntidadUsuario usuarioDevuelto = negocioUsuario.iniciarSesion(usuario, password);
+        if (usuarioDevuelto != null) {
             Inicio formulario = new Inicio(usuarioDevuelto);
             formulario.setVisible(true);
             this.dispose();
         } else {
-            NegocioAlerta.mostrar(resultado.getMensaje());
+            NegocioAlerta.mostrar("Usuario o contraseña incorrectos");
         }
     }
 

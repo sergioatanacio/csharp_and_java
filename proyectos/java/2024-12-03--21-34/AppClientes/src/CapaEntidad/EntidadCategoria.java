@@ -5,7 +5,7 @@ package CapaEntidad;
 
 import java.time.LocalDateTime;
 
-public class EntidadCategoriaProducto implements Entidad {
+public class EntidadCategoria implements Entidad {
     
     private int idCategoria;      // Identificador único de la categoría
     private String nombre;      // Descripción de la categoría
@@ -14,11 +14,10 @@ public class EntidadCategoriaProducto implements Entidad {
     private String fechaRegistro; // Fecha de registro de la categoría
 
     // Constructor vacío
-    public EntidadCategoriaProducto() {
-    }
+    public EntidadCategoria() {}
 
     // Constructor con todos los campos
-    public EntidadCategoriaProducto(int idCategoria, String nombre, String descripcion, boolean estado, String fechaRegistro) {
+    public EntidadCategoria(int idCategoria, String nombre, String descripcion, boolean estado, String fechaRegistro) {
         this.idCategoria = idCategoria;
         this.nombre = nombre;
         this.descripcion = descripcion;

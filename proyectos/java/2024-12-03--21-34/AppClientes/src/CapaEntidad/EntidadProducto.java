@@ -27,7 +27,7 @@ public class EntidadProducto  implements Entidad  {
     private String idUbicacion;
     private String imagen;
     private boolean estado;
-    private LocalDateTime fechaRegistro;
+    private String fechaRegistro;
 
     // Constructor vacío
     public EntidadProducto() {}
@@ -36,7 +36,7 @@ public class EntidadProducto  implements Entidad  {
     public EntidadProducto(int idProducto, String codigoBarras, String nombreProducto, String descripcion, 
                     String idCategoria, String unidadMedida, BigDecimal precioCompra, BigDecimal precioVenta,
                     String marca, String modelo, int stock, LocalDate fechaVencimiento, String idProveedor,
-                    String idUbicacion, String imagen, boolean estado, LocalDateTime fechaRegistro) {
+                    String idUbicacion, String imagen, boolean estado, String fechaRegistro) {
         this.idProducto = idProducto;
         this.codigoBarras = codigoBarras;
         this.nombreProducto = nombreProducto;
@@ -187,11 +187,11 @@ public class EntidadProducto  implements Entidad  {
         this.estado = estado;
     }
 
-    public LocalDateTime getFechaRegistro() {
+    public String getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

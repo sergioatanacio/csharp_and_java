@@ -1,11 +1,12 @@
 package CapaDatos;
 
-import CapaEntidad.EntidadCategoriaProducto;
+import CapaEntidad.EntidadCategoria;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import CapaEntidad.EntidadProducto;
 import CapaEntidad.EntidadUsuario;
+import java.time.LocalDateTime;
 
 
 public class DatosProducto  implements Datos<EntidadProducto, EntidadUsuario, ResultSet> {
@@ -17,7 +18,8 @@ public class DatosProducto  implements Datos<EntidadProducto, EntidadUsuario, Re
         this.connection = connection;
     }
 
-    // Método para insertar un producto
+
+        // Método para insertar un producto
     @Override
     public boolean insertar(EntidadProducto producto) {
         String sql = "INSERT INTO Producto (IdProducto, CodigoBarras, NombreProducto, Descripcion, IdCategoria, UnidadMedida, " +
@@ -40,7 +42,8 @@ public class DatosProducto  implements Datos<EntidadProducto, EntidadUsuario, Re
             stmt.setString(14, producto.getIdUbicacion());
             stmt.setString(15, producto.getImagen());
             stmt.setBoolean(16, producto.isEstado());
-            stmt.setTimestamp(17, Timestamp.valueOf(producto.getFechaRegistro()));
+            stmt.setTimestamp(17, producto.getFechaRegistro() != null ? Timestamp.valueOf(producto.getFechaRegistro()) : Timestamp.valueOf(LocalDateTime.now()));
+
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             // Manejo de la excepción
@@ -72,8 +75,9 @@ public class DatosProducto  implements Datos<EntidadProducto, EntidadUsuario, Re
             stmt.setString(13, producto.getIdUbicacion());
             stmt.setString(14, producto.getImagen());
             stmt.setBoolean(15, producto.isEstado());
-            stmt.setTimestamp(16, Timestamp.valueOf(producto.getFechaRegistro()));
+            stmt.setTimestamp(16, producto.getFechaRegistro() != null ? Timestamp.valueOf(producto.getFechaRegistro()) : Timestamp.valueOf(LocalDateTime.now()));
             stmt.setInt(17, producto.getId());
+
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             // Manejo de la excepción
@@ -82,6 +86,7 @@ public class DatosProducto  implements Datos<EntidadProducto, EntidadUsuario, Re
             return false;
         }
     }
+
 
 
 
@@ -165,7 +170,7 @@ public class DatosProducto  implements Datos<EntidadProducto, EntidadUsuario, Re
             producto.setIdUbicacion(rs.getString("IdUbicacion"));
             producto.setImagen(rs.getString("Imagen"));
             producto.setEstado(rs.getBoolean("Estado"));
-            producto.setFechaRegistro(rs.getTimestamp("FechaRegistro").toLocalDateTime());
+            producto.setFechaRegistro(rs.getString("FechaRegistro") );
             return producto;
         } catch (SQLException e) {
             // Manejo de la excepción

@@ -5,9 +5,9 @@
 package CapaNegocio;
 
 import CapaDatos.Datos;
-import CapaDatos.DatosCategoriaProducto;
+import CapaDatos.DatosCategoria;
 import CapaDatos.DatosConnection;
-import CapaEntidad.EntidadCategoriaProducto;
+import CapaEntidad.EntidadCategoria;
 import CapaEntidad.EntidadUsuario;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -18,36 +18,36 @@ import java.util.List;
  *
  * @author LAB02-PC1
  */
-public class NegocioCategoriaProducto implements Datos<EntidadCategoriaProducto, EntidadUsuario, ResultSet> {
-    private DatosCategoriaProducto datosCategoriaProducto = null;
+public class NegocioCategoria implements Datos<EntidadCategoria, EntidadUsuario, ResultSet> {
+    private DatosCategoria datosCategoriaProducto = null;
     
 
     // Constructor que recibe la capa DatosUsuario
-    public NegocioCategoriaProducto(EntidadUsuario parametro_usuario) {
+    public NegocioCategoria(EntidadUsuario parametro_usuario) {
        Connection connection = DatosConnection.getConnection();
-        this.datosCategoriaProducto = new DatosCategoriaProducto(connection, parametro_usuario);
+        this.datosCategoriaProducto = new DatosCategoria(connection, parametro_usuario);
     }
     @Override
-    public List<EntidadCategoriaProducto> listar(EntidadUsuario arg)  {
+    public List<EntidadCategoria> listar(EntidadUsuario arg)  {
         return datosCategoriaProducto.listar(arg);
     }
-    public boolean insertar(EntidadCategoriaProducto arg)  {
+    public boolean insertar(EntidadCategoria arg)  {
         return datosCategoriaProducto.insertar(arg);
     }
     @Override
-    public boolean eliminar(EntidadCategoriaProducto arg)  {
+    public boolean eliminar(EntidadCategoria arg)  {
         return datosCategoriaProducto.eliminar(arg);
     }
     @Override
-    public boolean actualizar(EntidadCategoriaProducto arg)  {
+    public boolean actualizar(EntidadCategoria arg)  {
         return datosCategoriaProducto.actualizar(arg);
     }
-    public EntidadCategoriaProducto buscarPorId(int id){
+    public EntidadCategoria buscarPorId(int id){
         return datosCategoriaProducto.buscarPorId(id);
     }
 
     @Override
-    public EntidadCategoriaProducto map(ResultSet arg) {
+    public EntidadCategoria map(ResultSet arg) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

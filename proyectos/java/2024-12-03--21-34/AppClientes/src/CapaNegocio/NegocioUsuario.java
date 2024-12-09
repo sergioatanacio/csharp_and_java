@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import CapaEntidad.EntidadUsuario;
 import CapaDatos.DatosConnection;
-import CapaEntidad.EntidadCategoriaProducto;
+import CapaEntidad.EntidadCategoria;
 import javax.swing.JOptionPane;
 import CapaEntidad.EntidadRespuesta;
 import java.sql.ResultSet;
@@ -82,7 +82,7 @@ public class NegocioUsuario implements Datos<EntidadUsuario, EntidadUsuario, Res
     }
 
     // Método para eliminar un usuario
-    public boolean eliminar(EntidadCategoriaProducto arg) {
+    public boolean eliminar(EntidadCategoria arg) {
         if (arg.getId() == 0) {
             throw new IllegalArgumentException("El ID del usuario no puede estar vacío.");
         }
@@ -118,46 +118,8 @@ public class NegocioUsuario implements Datos<EntidadUsuario, EntidadUsuario, Res
     }
 
     // Método para iniciar sesión (login)
-    public EntidadRespuesta<EntidadUsuario> iniciarSesion(String correo, String contrasena) {
-        EntidadRespuesta<EntidadUsuario> respuesta = new EntidadRespuesta<>();
-
-
-//            if (correo == null || correo.isEmpty()) {
-//                respuesta.setSuccess(false);
-//                respuesta.setMensaje("El correo no puede estar vacío.");
-//                return respuesta;
-//            }
-//            if (contrasena == null || contrasena.isEmpty()) {
-//                respuesta.setSuccess(false);
-//                respuesta.setMensaje("La contraseña no puede estar vacía.");
-//                return respuesta;
-//            }
-
-            // Buscar al usuario en la base de datos
-            EntidadUsuario usuario_local = datosUsuario.findByCorreoContrasena(correo, contrasena);
-
-//            if (usuario_local == null) {
-//                respuesta.setSuccess(false);
-//                respuesta.setMensaje("Correo o contraseña incorrectos.");
-//                return respuesta;
-//            }
-//
-//            // Validar si el usuario está activo
-//            if (!usuario_local.isEstado()) {
-//                respuesta.setSuccess(false);
-//                respuesta.setMensaje("El usuario está inactivo.");
-//                return respuesta;
-//            }
-
-            // Configurar la respuesta como exitosa
-            respuesta.setSuccess(true);
-            respuesta.setMensaje("Inicio de sesión exitoso.");
-            respuesta.setDatos(Collections.singletonList(usuario_local)); // Agregar el usuario a la lista de datos
-
-
-        // Manejar errores de SQL
-
-        return respuesta;
+    public EntidadUsuario iniciarSesion(String correo, String contrasena) {
+            return datosUsuario.findByCorreoContrasena(correo, contrasena);
     }
 
     // Métodos del interface Datos

@@ -8,68 +8,102 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import CapaEntidad.EntidadCategoriaProducto;
+import CapaEntidad.EntidadCategoria;
 import CapaEntidad.EntidadUsuario;
 import java.lang.System.Logger;
 
 
 
 
-public class DatosCategoriaProducto implements Datos<EntidadCategoriaProducto, EntidadUsuario, ResultSet> {
+public class DatosCategoria implements Datos<EntidadCategoria, EntidadUsuario, ResultSet> {
 
     public Connection connection;
     public EntidadUsuario e_usuario;
 
     // Constructor que recibe la conexión a la base de datos
-    public DatosCategoriaProducto(Connection connection, EntidadUsuario parametro_usuario) {
+    public DatosCategoria(Connection connection, EntidadUsuario parametro_usuario) {
         this.connection = connection;
         this.e_usuario = parametro_usuario;
     }
     
-
-
-
-
+    
+    
     @Override
-    public boolean insertar(EntidadCategoriaProducto arg) {
-        String sql = "INSERT INTO Categoria (IdCategoria, Descripcion, Estado, FechaRegistro) VALUES (?, ?, ?, ?)";
-        
+    public boolean insertar(EntidadCategoria arg) {
+        String sql = "INSERT INTO Categoria (Nombre, Descripcion, Estado) VALUES (?, ?, ?)";
+
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, arg.getId());
+            stmt.setString(1, arg.getNombre());
             stmt.setString(2, arg.getDescripcion());
             stmt.setBoolean(3, arg.isEstado());
-            stmt.setTimestamp(4, Timestamp.valueOf(arg.getFechaRegistro()));
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             // Manejo de la excepción
             e.printStackTrace(); // Puedes reemplazar esto con un logger o una acción más adecuada
-            
         }
         return false;
     }
+
+    
+    
+    
+    
     
     @Override
-    public boolean actualizar(EntidadCategoriaProducto arg) {
-    // Método para actualizar una categoría
-    
-        String sql = "UPDATE Categoria SET Descripcion = ?, Estado = ?, FechaRegistro = ? WHERE IdCategoria = ?";
+//    public boolean actualizar(EntidadCategoria arg) {
+//    // Método para actualizar una categoría
+//    
+//        String sql = "UPDATE Categoria SET Descripcion = ?, Estado = ?, FechaRegistro = ? WHERE IdCategoria = ?";
+//        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+//            stmt.setString(1, arg.getDescripcion());
+//            stmt.setBoolean(2, arg.isEstado());
+//            stmt.setString(3, arg.getFechaRegistro());
+//            stmt.setInt(4, arg.getId());
+//            return stmt.executeUpdate() > 0;
+//        } catch (SQLException e) {
+//            // Manejo de la excepción
+//            e.printStackTrace(); // Puedes reemplazar esto con un logger o una acción más adecuada
+//            
+//        }
+//        return false;
+//    
+//    }
+    public boolean actualizar(EntidadCategoria arg) {
+        // Método para actualizar una categoría
+        String sql = "UPDATE Categoria SET Descripcion = ?, Estado = ?, FechaRegistro = ?, Nombre = ? WHERE IdCategoria = ?";
+
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            // Depuración: Imprimir el SQL y los valores antes de ejecutarlo
+            System.out.println("SQL: " + sql);
+            System.out.println("Parámetros:");
+            System.out.println("Descripcion: " + arg.getDescripcion());
+            System.out.println("Estado: " + arg.isEstado());
+            System.out.println("FechaRegistro: " + arg.getFechaRegistro());
+            System.out.println("IdCategoria: " + arg.getId());
+            System.out.println("Nombre: " + arg.getId());
+
             stmt.setString(1, arg.getDescripcion());
             stmt.setBoolean(2, arg.isEstado());
-            stmt.setTimestamp(3, Timestamp.valueOf(arg.getFechaRegistro()));
-            stmt.setInt(4, arg.getId());
-            return stmt.executeUpdate() > 0;
+            stmt.setString(3, arg.getFechaRegistro());
+            stmt.setString(4, arg.getNombre());
+            stmt.setInt(5, arg.getId());
+
+            int rowsAffected = stmt.executeUpdate();
+
+            // Depuración: Imprimir el resultado de la ejecución
+            System.out.println("Filas afectadas: " + rowsAffected);
+
+            return rowsAffected > 0;
         } catch (SQLException e) {
             // Manejo de la excepción
-            e.printStackTrace(); // Puedes reemplazar esto con un logger o una acción más adecuada
-            
+            System.err.println("Error al ejecutar la consulta SQL:");
+            e.printStackTrace(); // Puedes reemplazar esto con un logger si lo prefieres
         }
         return false;
-    
     }
-    
+
     @Override
-    public boolean eliminar(EntidadCategoriaProducto arg) {
+    public boolean eliminar(EntidadCategoria arg) {
         String sql = "DELETE FROM Categoria WHERE IdCategoria = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, arg.getId());
@@ -84,8 +118,8 @@ public class DatosCategoriaProducto implements Datos<EntidadCategoriaProducto, E
     }
     
     @Override
-    public EntidadCategoriaProducto buscarPorId(int id) {
-        String sql = "SELECT * FROM Categoria WHERE IdCategoria = ? AND estado = 1;";
+    public EntidadCategoria buscarPorId(int id) {
+        String sql = "SELECT * FROM Categoria WHERE IdCategoria = ? ";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
@@ -109,9 +143,9 @@ public class DatosCategoriaProducto implements Datos<EntidadCategoriaProducto, E
 
     
     @Override
-    public List<EntidadCategoriaProducto> listar(EntidadUsuario arg) {
-        List<EntidadCategoriaProducto> categorias = new ArrayList<>();
-        String sql = "SELECT * FROM Categoria";
+    public List<EntidadCategoria> listar(EntidadUsuario arg) {
+        List<EntidadCategoria> categorias = new ArrayList<>();
+        String sql = "SELECT * FROM Categoria;";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -131,9 +165,9 @@ public class DatosCategoriaProducto implements Datos<EntidadCategoriaProducto, E
         
     }
 
-    public EntidadCategoriaProducto map(ResultSet arg) {
+    public EntidadCategoria map(ResultSet arg) {
         try {
-            EntidadCategoriaProducto categoria = new EntidadCategoriaProducto();
+            EntidadCategoria categoria = new EntidadCategoria();
             categoria.setId(arg.getInt("IdCategoria"));
             categoria.setNombre(arg.getString("Nombre"));
             categoria.setDescripcion(arg.getString("Descripcion"));
