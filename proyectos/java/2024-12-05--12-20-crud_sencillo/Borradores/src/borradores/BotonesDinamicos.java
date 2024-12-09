@@ -1,5 +1,6 @@
+package borradores;
 
-package CapaPresentacion;
+
 
 
 import javax.swing.*;

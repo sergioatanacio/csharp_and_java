@@ -8,6 +8,7 @@ import CapaEntidad.EntidadUsuario;
 import CapaNegocio.NegocioCategoria;
 import Paneles.FrmCategoria;
 import Paneles.FrmCategoria;
+import Paneles.FrmIngresarProducto;
 import java.awt.BorderLayout;
 import javax.swing.SwingUtilities;
 
@@ -48,6 +49,7 @@ public class Inicio extends javax.swing.JFrame {
         m_cerrar = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         m_categoriaproducto = new javax.swing.JMenuItem();
+        m_proveedor = new javax.swing.JMenuItem();
         m_ingresarproductos = new javax.swing.JMenuItem();
         m_ingresarclientes = new javax.swing.JMenuItem();
         m_ventas = new javax.swing.JMenuItem();
@@ -104,6 +106,9 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenu2.add(m_categoriaproducto);
+
+        m_proveedor.setText("Proveedor");
+        jMenu2.add(m_proveedor);
 
         m_ingresarproductos.setText("Ingresar Productos");
         m_ingresarproductos.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +174,8 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void m_ingresarproductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_ingresarproductosActionPerformed
-
+        FrmIngresarProducto formulario = new FrmIngresarProducto(this.usuario);
+        formulario.setVisible(true);
     }//GEN-LAST:event_m_ingresarproductosActionPerformed
 
     private void m_categoriaproductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_categoriaproductoActionPerformed
@@ -237,6 +243,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem m_gestiondeinventario;
     private javax.swing.JMenuItem m_ingresarclientes;
     private javax.swing.JMenuItem m_ingresarproductos;
+    private javax.swing.JMenuItem m_proveedor;
     private javax.swing.JMenuItem m_ventas;
     private javax.swing.JMenuItem m_verusuarios;
     // End of variables declaration//GEN-END:variables
