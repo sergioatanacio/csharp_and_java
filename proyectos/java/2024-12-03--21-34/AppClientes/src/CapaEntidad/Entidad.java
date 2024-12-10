@@ -13,4 +13,6 @@ package CapaEntidad;
 public interface Entidad {
     public int getId();
     public void setId(int arg);
+    public boolean isEstado();
+    public void setEstado(boolean Estado);
 }

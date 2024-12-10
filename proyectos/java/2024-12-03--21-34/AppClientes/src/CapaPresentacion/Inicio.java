@@ -9,6 +9,7 @@ import CapaNegocio.NegocioCategoria;
 import Paneles.FrmCategoria;
 import Paneles.FrmCategoria;
 import Paneles.FrmIngresarProducto;
+import Paneles.FrmProveedor;
 import java.awt.BorderLayout;
 import javax.swing.SwingUtilities;
 
@@ -108,6 +109,11 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2.add(m_categoriaproducto);
 
         m_proveedor.setText("Proveedor");
+        m_proveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                m_proveedorActionPerformed(evt);
+            }
+        });
         jMenu2.add(m_proveedor);
 
         m_ingresarproductos.setText("Ingresar Productos");
@@ -191,6 +197,11 @@ public class Inicio extends javax.swing.JFrame {
     private void m_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_cerrarActionPerformed
         System.exit(0);
     }//GEN-LAST:event_m_cerrarActionPerformed
+
+    private void m_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_m_proveedorActionPerformed
+        FrmProveedor formulario = new FrmProveedor(this.usuario);
+        formulario.setVisible(true);
+    }//GEN-LAST:event_m_proveedorActionPerformed
 
     /**
      * @param args the command line arguments
